@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package chat;
+
+service Chat {
+    rpc LiveChat (stream ChatMessage) returns (stream ChatMessage) {}
+    rpc CheckForName (NameCheckRequest) returns (NameCheckResponse) {}
+}
+
+message ChatMessage {
+    string sender = 1;
+    int64 timestamp = 2;
+    string chatroom = 3;
+    string content = 4;
+    string target = 5;
+}
+
+message NameCheckRequest {
+    string name = 1;
+}
+
+message NameCheckResponse {
+    bool available = 1;
+}
